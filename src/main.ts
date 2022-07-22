@@ -27,27 +27,27 @@ interface PostBody {
     const body: PostBody = {
 
       //TODO
-      title: null, // Article's title (from our Kintone record)
-      contentFormat: null, // 'markdown' or 'html' (writing format)
-      content: null, // Article's body (from our Kintone record)
-      tags: null, // String "tags" for our article. Optional!
-      publishStatus: null, // The status of our article: 'public', 'draft', or 'unlisted'
-      notifyFollowers: null // Sends a notification after publishing.
+      title: event.record.title.value, // Article's title (from our Kintone record)
+      contentFormat: 'markdown', // 'markdown' or 'html' (writing format)
+      content: event.record.body.value, // Article's body (from our Kintone record)
+      tags: ['this-is-only-a-test'], // String "tags" for our article. Optional!
+      publishStatus: 'public', // The status of our article: 'public', 'draft', or 'unlisted'
+      notifyFollowers: false // Sends a notification after publishing.
     }
 
     // Create a button
     const mySpaceFieldButton: HTMLElement = document.createElement('button');
     //TODO
-    mySpaceFieldButton.id = null; // Our "Element ID" from our Blank Space in the Kintone App.
+    mySpaceFieldButton.id = 'publishToMedium'; // Our "Element ID" from our Blank Space in the Kintone App.
     // Give it an id & class (for CSS), and text on the button.
-    mySpaceFieldButton.className = null;
-    mySpaceFieldButton.innerHTML = null;
+    mySpaceFieldButton.className = '.upload-button';
+    mySpaceFieldButton.innerHTML = 'My Publish Button';
 
     // TODO
     // Run a function when the button is clicked
     mySpaceFieldButton.onclick = function () {
       // We need to call our API POST function with request's body... 🧐
-      null
+      postToMedium(body);
     };
     // Set button on the Blank Space field
     kintone.app.record.getSpaceElement('publishToMedium')!.appendChild(mySpaceFieldButton);
